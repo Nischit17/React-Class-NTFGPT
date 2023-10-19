@@ -8,6 +8,8 @@ import {
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -15,6 +17,7 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState(null);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const name = useRef(null);
   const email = useRef(null);
@@ -42,6 +45,15 @@ const Login = () => {
               "https://yt3.ggpht.com/LmAPb0hBm1Z7AsX9N7T5KkQT70cHTb2ntDAj87KUnsh7RSGq1XZFIJum0p_qxDbAryUrUdsP1uo=s88-c-k-c0x00ffffff-no-rj",
           })
             .then(() => {
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                })
+              );
               navigate("/browse");
             })
             .catch((error) => {
