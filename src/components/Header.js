@@ -38,7 +38,7 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="absolute w-screen px-96 py-1 bg-gradient-to-b from-black z-10 flex justify-between">
+    <div className="absolute w-screen px-96 py-1 bg-gradient-to-b from-black z-10 justify-between">
       <img
         className="w-[155px]"
         src="https://logohistory.net/wp-content/uploads/2023/05/Netflix-Logo.png"
